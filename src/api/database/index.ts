@@ -5,3 +5,5 @@ export * from './users';
 export * from './superGroup';
 export * from './unreadMessage';
 export * from './superGroupMessage';
+export * from './groupRequest';
+export * from './blacks';

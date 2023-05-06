@@ -251,6 +251,17 @@ export function initDatabaseAPI(): void {
     'deleteMessageReactionExtension'
   );
 
+  // group request
+  window.getSendGroupApplication = registerMethodOnWindow(
+    'getSendGroupApplication'
+  );
+  window.getAdminGroupApplication = registerMethodOnWindow(
+    'getAdminGroupApplication'
+  );
+
+  // blacks
+  window.getBlackList = registerMethodOnWindow('getBlackList');
+
   // debug
   window.exec = registerMethodOnWindow('exec');
   window.getRowsModified = registerMethodOnWindow('getRowsModified');

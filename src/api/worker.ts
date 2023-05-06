@@ -63,6 +63,13 @@ import {
   superGroupGetMessageList,
   superGroupUpdateColumnsMessage,
   superGroupSearchAllMessageByContentType,
+
+  // group request
+  getSendGroupApplication,
+  getAdminGroupApplication,
+
+  // blacks
+  getBlackList,
 } from '@/api/database';
 
 import { getInstance } from './database/instance';
@@ -248,3 +255,10 @@ rpc.registerMethod(
   'updateMessageReactionExtension',
   updateMessageReactionExtension
 );
+
+// group request
+rpc.registerMethod('getSendGroupApplication', getSendGroupApplication);
+rpc.registerMethod('getAdminGroupApplication', getAdminGroupApplication);
+
+// blacks
+rpc.registerMethod('getBlackList', getBlackList);

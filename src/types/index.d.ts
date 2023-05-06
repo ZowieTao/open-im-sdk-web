@@ -84,6 +84,13 @@ declare global {
     deleteMessageReactionExtension: DatabaseApi;
     updateMessageReactionExtension: DatabaseApi;
 
+    // group request
+    getSendGroupApplication: DatabaseApi;
+    getAdminGroupApplication: DatabaseApi;
+
+    // blacks
+    getBlackList: DatabaseApi;
+
     // registered by go wasm
     initSDK: (operationID: string, config: string) => void;
     login: (operationID: string, userID: string, token: string) => Promise<any>;
@@ -224,6 +231,7 @@ declare global {
     exec: (sql: string) => Promise<any>;
     exportDB: () => Promise<string>; //return Uint8Array
   }
+
   class Go {
     exited: boolean;
     importObject: WebAssembly.Imports;
