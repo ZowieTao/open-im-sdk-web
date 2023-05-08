@@ -29,6 +29,8 @@ declare global {
     getMsgSeqListBySelfUserID: (userID: string) => Promise<string | undefined>;
     getMsgSeqListByGroupID: (groupID: string) => Promise<string | undefined>;
     updateMessageStatusBySourceID: DatabaseApi;
+    getAbnormalMsgSeq: DatabaseApi;
+    getAbnormalMsgSeqList: DatabaseApi;
 
     // conversation
     getAllConversationListDB: DatabaseApi;
@@ -89,7 +91,18 @@ declare global {
     getAdminGroupApplication: DatabaseApi;
 
     // blacks
-    getBlackList: DatabaseApi;
+    getBlackListDB: DatabaseApi;
+
+    // group
+    getJoinedGroupListDB: DatabaseApi;
+    getJoinedWorkingGroupIDList: DatabaseApi;
+
+    // friend request
+    getRecvFriendApplication: DatabaseApi;
+    getSendFriendApplication: DatabaseApi;
+
+    // friend
+    getAllFriendList: DatabaseApi;
 
     // registered by go wasm
     initSDK: (operationID: string, config: string) => void;

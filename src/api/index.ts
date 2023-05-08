@@ -114,6 +114,10 @@ export function initDatabaseAPI(): void {
   window.searchAllMessageByContentType = registerMethodOnWindow(
     'searchAllMessageByContentType'
   );
+  window.getAbnormalMsgSeq = registerMethodOnWindow('getAbnormalMsgSeq');
+  window.getAbnormalMsgSeqList = registerMethodOnWindow(
+    'getAbnormalMsgSeqList'
+  );
 
   // conversation
   window.getAllConversationListDB = registerMethodOnWindow(
@@ -171,6 +175,9 @@ export function initDatabaseAPI(): void {
   window.deleteSuperGroup = registerMethodOnWindow('deleteSuperGroup');
   window.insertSuperGroup = registerMethodOnWindow('insertSuperGroup');
   window.updateSuperGroup = registerMethodOnWindow('updateSuperGroup');
+  window.getJoinedWorkingGroupIDList = registerMethodOnWindow(
+    'getJoinedWorkingGroupIDList'
+  );
 
   // unread messages
   window.deleteConversationUnreadMessageList = registerMethodOnWindow(
@@ -260,7 +267,21 @@ export function initDatabaseAPI(): void {
   );
 
   // blacks
-  window.getBlackList = registerMethodOnWindow('getBlackList');
+  window.getBlackListDB = registerMethodOnWindow('getBlackList');
+
+  // group
+  window.getJoinedGroupListDB = registerMethodOnWindow('getJoinedGroupList');
+
+  // friend request
+  window.getRecvFriendApplication = registerMethodOnWindow(
+    'getRecvFriendApplication'
+  );
+  window.getSendFriendApplication = registerMethodOnWindow(
+    'getSendFriendApplication'
+  );
+
+  // friend
+  window.getAllFriendList = registerMethodOnWindow('getAllFriendList');
 
   // debug
   window.exec = registerMethodOnWindow('exec');
