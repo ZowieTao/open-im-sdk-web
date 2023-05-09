@@ -306,8 +306,9 @@ export function updateMessageStatusBySourceID(
     `
   );
 }
+
 export function getAbnormalMsgSeq(db: Database) {
-  return db.exec("SELECT IFNULL(max(seq),0) FROM 'local_err_chat_logs'");
+  return db.exec("SELECT IFNULL(max(seq), 0) FROM 'local_err_chat_logs'");
 }
 
 export function getAbnormalMsgSeqList(db: Database) {

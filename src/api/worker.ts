@@ -65,6 +65,7 @@ import {
   superGroupGetMessageList,
   superGroupUpdateColumnsMessage,
   superGroupSearchAllMessageByContentType,
+  getSuperGroupAbnormalMsgSeq,
 
   // group request
   getSendGroupApplication,
@@ -205,6 +206,7 @@ rpc.registerMethod(
   'superGroupSearchAllMessageByContentType',
   superGroupSearchAllMessageByContentType
 );
+rpc.registerMethod('getSuperGroupAbnormalMsgSeq', getSuperGroupAbnormalMsgSeq);
 
 rpc.registerMethod('exec', async (sql: string) => {
   const db = await getInstance();

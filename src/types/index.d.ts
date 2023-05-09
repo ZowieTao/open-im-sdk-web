@@ -77,6 +77,7 @@ declare global {
     superGroupGetMessageList: DatabaseApi;
     getRowsModified: DatabaseApi;
     superGroupSearchAllMessageByContentType: DatabaseApi;
+    getSuperGroupAbnormalMsgSeq: DatabaseApi;
     // reaction extension
     getMessageReactionExtension: DatabaseApi;
     insertMessageReactionExtension: DatabaseApi;

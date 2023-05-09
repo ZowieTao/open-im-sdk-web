@@ -12,6 +12,7 @@ import {
   superGroupGetMessageListNoTime as databaseSuperGroupGetMessageListNoTime,
   superGroupGetMessageList as databaseSuperGroupGetMessageList,
   superGroupSearchAllMessageByContentType as databaseSuperGroupSearchAllMessageByContentType,
+  getSuperGroupAbnormalMsgSeq as databaseGetSuperGroupAbnormalMsgSeq,
 } from '@/sqls';
 import {
   convertSqlExecResult,
@@ -367,6 +368,26 @@ export async function superGroupSearchAllMessageByContentType(
         'isExternalExtensions',
       ])
     );
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
+export async function getSuperGroupAbnormalMsgSeq(
+  groupID: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+
+    const execResult = databaseGetSuperGroupAbnormalMsgSeq(db, groupID);
+
+    return formatResponse(execResult[0]?.values?.[0]?.[0]);
   } catch (e) {
     console.error(e);
 

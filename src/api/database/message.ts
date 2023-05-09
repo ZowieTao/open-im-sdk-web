@@ -474,7 +474,7 @@ export async function getAbnormalMsgSeq(): Promise<string> {
 
     const execResult = databaseGetAbnormalMsgSeq(db);
 
-    return formatResponse(execResult);
+    return formatResponse(execResult[0]?.values?.[0]?.[0]);
   } catch (error) {
     console.error(error);
 

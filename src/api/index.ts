@@ -179,6 +179,11 @@ export function initDatabaseAPI(): void {
     'getJoinedWorkingGroupIDList'
   );
 
+  // super group chat logs
+  window.getSuperGroupAbnormalMsgSeq = registerMethodOnWindow(
+    'getSuperGroupAbnormalMsgSeq'
+  );
+
   // unread messages
   window.deleteConversationUnreadMessageList = registerMethodOnWindow(
     'deleteConversationUnreadMessageList'
