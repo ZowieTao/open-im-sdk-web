@@ -126,7 +126,6 @@ export function localSgErrChatLogs(db: Database, groupID: string) {
         "ex" varchar(1024),
 
         primary key ('seq'))
-    );
     `
   );
 }
