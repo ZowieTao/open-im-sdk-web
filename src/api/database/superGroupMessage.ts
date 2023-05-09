@@ -387,7 +387,7 @@ export async function getSuperGroupAbnormalMsgSeq(
 
     const execResult = databaseGetSuperGroupAbnormalMsgSeq(db, groupID);
 
-    return formatResponse(execResult[0]?.values?.[0]?.[0]);
+    return formatResponse(`${execResult[0]?.values?.[0]?.[0]}`);
   } catch (e) {
     console.error(e);
 
