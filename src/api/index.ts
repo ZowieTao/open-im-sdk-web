@@ -179,11 +179,6 @@ export function initDatabaseAPI(): void {
     'getJoinedWorkingGroupIDList'
   );
 
-  // super group chat logs
-  window.getSuperGroupAbnormalMsgSeq = registerMethodOnWindow(
-    'getSuperGroupAbnormalMsgSeq'
-  );
-
   // unread messages
   window.deleteConversationUnreadMessageList = registerMethodOnWindow(
     'deleteConversationUnreadMessageList'
@@ -241,6 +236,15 @@ export function initDatabaseAPI(): void {
   );
   window.superGroupGetAlreadyExistSeqList = registerMethodOnWindow(
     'superGroupGetAlreadyExistSeqList'
+  );
+
+  // super group error chat logs
+  window.getSuperGroupAbnormalMsgSeq = registerMethodOnWindow(
+    'getSuperGroupAbnormalMsgSeq'
+  );
+
+  window.superBatchInsertExceptionMsg = registerMethodOnWindow(
+    'superBatchInsertExceptionMsg'
   );
 
   // reaction extensions

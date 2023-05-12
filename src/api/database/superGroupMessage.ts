@@ -14,6 +14,7 @@ import {
   superGroupSearchAllMessageByContentType as databaseSuperGroupSearchAllMessageByContentType,
   getSuperGroupAbnormalMsgSeq as databaseGetSuperGroupAbnormalMsgSeq,
   superGroupGetAlreadyExistSeqList as databaseSuperGroupGetAlreadyExistSeqList,
+  superBatchInsertExceptionMsg as databaseSuperBatchInsertExceptionMsg,
 } from '@/sqls';
 import {
   convertSqlExecResult,
@@ -381,6 +382,32 @@ export async function superGroupSearchAllMessageByContentType(
   }
 }
 
+export async function superGroupGetAlreadyExistSeqList(
+  groupID: string,
+  lostSeqListStr: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+    const _lostSeqList = jsonDecode(lostSeqListStr, []);
+
+    const execResult = databaseSuperGroupGetAlreadyExistSeqList(
+      db,
+      groupID,
+      _lostSeqList
+    );
+
+    return formatResponse(execResult[0]?.values[0]);
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
 export async function getSuperGroupAbnormalMsgSeq(
   groupID: string
 ): Promise<string> {
@@ -401,27 +428,30 @@ export async function getSuperGroupAbnormalMsgSeq(
   }
 }
 
-export async function superGroupGetAlreadyExistSeqList(
-  groupID: string,
-  lostSeqListStr: string
+export async function superBatchInsertExceptionMsg(
+  errMsgListStr: string,
+  groupID: string
 ): Promise<string> {
   try {
+    const errMessageList = (
+      JSON.parse(errMsgListStr) as ClientSuperGroupMessage[]
+    ).map((v: Record<string, unknown>) => convertToSnakeCaseObject(v));
+
     const db = await getInstance();
-    const _lostSeqList = jsonDecode(lostSeqListStr, []);
+    databaseSuperBatchInsertExceptionMsg(db, errMessageList, groupID);
 
-    const execResult = databaseSuperGroupGetAlreadyExistSeqList(
-      db,
-      groupID,
-      _lostSeqList
-    );
+    const modified = db.getRowsModified();
+    if (modified === 0) {
+      throw 'superBatchInsertExceptionMsg no record insert';
+    }
 
-    return formatResponse(execResult[0]);
+    return formatResponse(0);
   } catch (e) {
     console.error(e);
 
     return formatResponse(
-      undefined,
-      DatabaseErrorCode.ErrorInit,
+      'ErrorDBNoBatch',
+      DatabaseErrorCode.ErrorDBNoBatch,
       JSON.stringify(e)
     );
   }

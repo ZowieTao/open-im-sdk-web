@@ -79,6 +79,8 @@ declare global {
     superGroupSearchAllMessageByContentType: DatabaseApi;
     getSuperGroupAbnormalMsgSeq: DatabaseApi;
     superGroupGetAlreadyExistSeqList: DatabaseApi;
+    superBatchInsertExceptionMsg: DatabaseApi;
+
     // reaction extension
     getMessageReactionExtension: DatabaseApi;
     insertMessageReactionExtension: DatabaseApi;

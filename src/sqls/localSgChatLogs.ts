@@ -328,6 +328,19 @@ export function superGroupSearchAllMessageByContentType(
   );
 }
 
+export function superGroupGetAlreadyExistSeqList(
+  db: Database,
+  groupID: string,
+  lostSeqList: string[]
+) {
+  _initSuperGroupTable(db, groupID);
+  const values = lostSeqList.map(v => `'${v}'`).join(',');
+
+  const sql = `select seq from local_sg_chat_logs_${groupID} where seq in (${values})`;
+
+  return db.exec(sql);
+}
+
 export function getSuperGroupAbnormalMsgSeq(db: Database, groupID: string) {
   _initSuperGroupErrLogsTable(db, groupID);
 
@@ -336,15 +349,18 @@ export function getSuperGroupAbnormalMsgSeq(db: Database, groupID: string) {
   );
 }
 
-export function superGroupGetAlreadyExistSeqList(
+export function superBatchInsertExceptionMsg(
   db: Database,
-  groupID: string,
-  lostSeqList: string[]
+  errMessageList: ClientSuperGroupMessage[],
+  groupID: string
 ) {
   _initSuperGroupErrLogsTable(db, groupID);
-  const values = lostSeqList.map(v => `'${v}'`).join(',');
 
-  const sql = `select * from local_sg_chat_logs_${groupID} where seq in (${values})`;
+  const sql = squel
+    .insert()
+    .into(`local_sg_err_chat_logs_${groupID}`)
+    .setFieldsRows(errMessageList)
+    .toString();
 
   return db.exec(sql);
 }

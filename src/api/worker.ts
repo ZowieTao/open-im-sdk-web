@@ -67,6 +67,7 @@ import {
   superGroupSearchAllMessageByContentType,
   getSuperGroupAbnormalMsgSeq,
   superGroupGetAlreadyExistSeqList,
+  superBatchInsertExceptionMsg,
 
   // group request
   getSendGroupApplication,
@@ -211,6 +212,10 @@ rpc.registerMethod('getSuperGroupAbnormalMsgSeq', getSuperGroupAbnormalMsgSeq);
 rpc.registerMethod(
   'superGroupGetAlreadyExistSeqList',
   superGroupGetAlreadyExistSeqList
+);
+rpc.registerMethod(
+  'superBatchInsertExceptionMsg',
+  superBatchInsertExceptionMsg
 );
 
 rpc.registerMethod('exec', async (sql: string) => {
