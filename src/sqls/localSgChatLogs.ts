@@ -335,3 +335,16 @@ export function getSuperGroupAbnormalMsgSeq(db: Database, groupID: string) {
     `SELECT IFNULL(max(seq), 0) FROM local_sg_err_chat_logs_${groupID}`
   );
 }
+
+export function superGroupGetAlreadyExistSeqList(
+  db: Database,
+  groupID: string,
+  lostSeqList: string[]
+) {
+  _initSuperGroupErrLogsTable(db, groupID);
+  const values = lostSeqList.map(v => `'${v}'`).join(',');
+
+  const sql = `select * from local_sg_chat_logs_${groupID} where seq in (${values})`;
+
+  return db.exec(sql);
+}

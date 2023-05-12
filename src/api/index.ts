@@ -239,6 +239,9 @@ export function initDatabaseAPI(): void {
   window.updateMessageStatusBySourceID = registerMethodOnWindow(
     'updateMessageStatusBySourceID'
   );
+  window.superGroupGetAlreadyExistSeqList = registerMethodOnWindow(
+    'superGroupGetAlreadyExistSeqList'
+  );
 
   // reaction extensions
   window.getMessageReactionExtension = registerMethodOnWindow(

@@ -13,11 +13,13 @@ import {
   superGroupGetMessageList as databaseSuperGroupGetMessageList,
   superGroupSearchAllMessageByContentType as databaseSuperGroupSearchAllMessageByContentType,
   getSuperGroupAbnormalMsgSeq as databaseGetSuperGroupAbnormalMsgSeq,
+  superGroupGetAlreadyExistSeqList as databaseSuperGroupGetAlreadyExistSeqList,
 } from '@/sqls';
 import {
   convertSqlExecResult,
   convertToSnakeCaseObject,
   formatResponse,
+  jsonDecode,
 } from '@/utils';
 import { getInstance } from './instance';
 
@@ -387,7 +389,33 @@ export async function getSuperGroupAbnormalMsgSeq(
 
     const execResult = databaseGetSuperGroupAbnormalMsgSeq(db, groupID);
 
-    return formatResponse(`${execResult[0]?.values?.[0]?.[0]}`);
+    return formatResponse(execResult[0]?.values[0]?.[0]);
+  } catch (e) {
+    console.error(e);
+
+    return formatResponse(
+      undefined,
+      DatabaseErrorCode.ErrorInit,
+      JSON.stringify(e)
+    );
+  }
+}
+
+export async function superGroupGetAlreadyExistSeqList(
+  groupID: string,
+  lostSeqListStr: string
+): Promise<string> {
+  try {
+    const db = await getInstance();
+    const _lostSeqList = jsonDecode(lostSeqListStr, []);
+
+    const execResult = databaseSuperGroupGetAlreadyExistSeqList(
+      db,
+      groupID,
+      _lostSeqList
+    );
+
+    return formatResponse(execResult[0]);
   } catch (e) {
     console.error(e);
 

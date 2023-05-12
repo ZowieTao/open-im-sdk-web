@@ -96,7 +96,6 @@ export function localErrChatLogs(db: Database): QueryExecResult[] {
         "create_time" integer,
         "attached_info" varchar(1024),
         "ex" varchar(1024),
-
         primary key ('seq'))
     `);
 }
